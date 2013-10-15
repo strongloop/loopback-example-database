@@ -1,0 +1,4 @@
+{
+  "editor": "/tools/model-edit/editor.html",
+  "source": {"properties":{"email":{"type":"string"},"level":{"type":"number"},"created":{"type":"date"},"modified":{"type":"date"}},"name":"account","public":true,"data-source":"db","plural":"accounts","propertyNames":["email","level","created","modified"]}
+}

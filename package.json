@@ -1,0 +1,17 @@
+{
+  "name": "loopback-mysql-example",
+  "description": "LoopBack MySQL example",
+  "version": "0.0.1",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "loopback": "~1.0.0",
+    "loopback-connector-mysql": "git+ssh://git@github.com:strongloop/loopback-connector-mysql"
+  },
+  "optionalDependencies": {
+    "strong-cluster-control": "~0.1.0",
+    "strong-agent": "~0.2.15"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "port": 3000,
+  "hostname": "0.0.0.0",
+  "middleware": [
+    "compress",
+    "favicon",
+    "logger",
+    "bodyParser",
+    "methodOverride",
+    "rest"
+  ],
+  "models": [
+    "account"
+  ]
+}
