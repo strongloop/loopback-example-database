@@ -1,14 +1,18 @@
 # loopback-mysql-example
 
-An example to demonstrate [LoopBack MySQL connector](https://github.com/strongloop/loopback-connector-mysql). This module
-allows LoopBack applications to use MySQL databases to back data models, such as Customer and Catalog.
+This project contains examples to demonstrate [LoopBack MySQL connector](https://github.com/strongloop/loopback-connector-mysql).
+The MySQL connector module allows LoopBack applications to interact with MySQL databases for the data models, such as
+Account and Catalog.
 
 For those who are not familiar with [LoopBack](http://docs.strongloop.com/loopback), it’s an open source mobile backend
 framework that connects mobile devices to enterprise data. LoopBack provides out-of-box data access capabilities for
 models through pluggable [datasources and connectors](http://docs.strongloop.com/loopback-datasource-juggler/#loopback-datasource-and-connector-guide).
-Such models are exposed to mobile devices as REST APIs and SDKs.
+Connectors provide connectivity to variable backend systems, such as databases or REST APIs. Models are in turn exposed
+to mobile devices as REST APIs and SDKs.
 
 ## Prerequisite
+
+First of all, we need to have a MySQL server running. In this article, we'll connect to an instance running on demo.strongloop.com.
 
 To create a LoopBack application from command-line tools, please install [StrongLoop Suite 1.0](http://strongloop.com/strongloop-suite/downloads/).
 
