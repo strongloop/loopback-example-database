@@ -7,8 +7,9 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "loopback": "~1.0.0",
-    "loopback-connector-mysql": "git+ssh://git@github.com:strongloop/loopback-connector-mysql"
+    "loopback-datasource-juggler": "1.x.x",
+    "loopback": "1.x.x",
+    "loopback-connector-mysql": "1.x.x"
   },
   "optionalDependencies": {
     "strong-cluster-control": "~0.1.0",
