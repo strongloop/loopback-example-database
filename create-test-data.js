@@ -1,5 +1,6 @@
-var dataSource = require('./modules/db');
-var Account = require('./modules/account');
+var app = require('./app');
+var dataSource = app.dataSources.mysql;
+var Account = app.models.account;
 var accounts = [ 
     { email: "foo@bar.com",
       level: 10,

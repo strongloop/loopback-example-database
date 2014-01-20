@@ -1,18 +1,20 @@
 {
   "name": "loopback-mysql-example",
   "description": "LoopBack MySQL example",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "main": "app.js",
   "scripts": {
     "start": "node app.js"
   },
   "dependencies": {
-    "loopback-datasource-juggler": "1.x.x",
-    "loopback": "1.x.x",
-    "loopback-connector-mysql": "1.x.x"
+    "loopback-datasource-juggler": "1.2.x",
+    "loopback": "1.5.x",
+    "loopback-connector-mysql": "1.1.x",
+    "loopback-push-notification": "~1.1.0"
   },
   "optionalDependencies": {
-    "strong-cluster-control": "~0.1.0",
-    "strong-agent": "~0.2.15"
+    "strong-cluster-control": "~0.2.2",
+    "strong-agent": "~0.2.20",
+    "loopback-explorer": "~1.1.0"
   }
 }
