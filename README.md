@@ -39,7 +39,7 @@ Follow the prompts to create your model with the following properties:
 - created: date - The date your account is created
 - modified: date - The date your account is updated
 
-The properties will be saved to modules/account/properties.json.  
+The properties will be saved to models.json.  
 
 
 ## Install dependencies
@@ -47,8 +47,7 @@ The properties will be saved to modules/account/properties.json.
 Let's add the `loopback-connector-mysql` module and install the dependencies.
 
 ```sh
-    slc install strongloop/loopback-connector-mysql --save
-    slc install
+    npm install loopback-connector-mysql --save
 ```
 
 ## Configure the data source
