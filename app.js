@@ -3,6 +3,7 @@ var path = require('path');
 var app = module.exports = loopback();
 var started = new Date();
 
+/*
 // operational dependencies
 try {
   require('strong-agent').profile();
@@ -17,6 +18,7 @@ try {
 if(clusterOptions.clustered && clusterOptions.isMaster) {
   return control.start(clusterOptions);
 }
+*/
 
 /*
  * 1. Configure LoopBack models and datasources

@@ -12,6 +12,7 @@ dataSource.discoverAndBuildModels('account', {owner: 'demo'}, function (err, mod
         } else {
             console.log(act);
         }
+        dataSource.disconnect();
     });
 });
 

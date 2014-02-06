@@ -13,11 +13,17 @@ var accounts = [
       modified: new Date()
     } ];
 
+var count = accounts.length;
 dataSource.automigrate('account', function (err) {
   accounts.forEach(function(act) {
     Account.create(act, function(err, result) {
       if(!err) {
         console.log('Record created:', result);
+        count--;
+        if(count === 0) {
+          console.log('done');
+          dataSource.disconnect();
+        }
       }
     });
   });
