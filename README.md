@@ -115,7 +115,7 @@ to keep the existing data.
 
 Open your browser now.
 
-To get all accounts, go to http://localhost:3000/accounts.
+To get all accounts, go to http://localhost:3000/api/accounts.
 
 ```json
     [
@@ -136,7 +136,7 @@ To get all accounts, go to http://localhost:3000/accounts.
     ]
 ```
 
-To get an account by id, go to http://localhost:3000/accounts/1.
+To get an account by id, go to http://localhost:3000/api/accounts/1.
 
 ```json
     {
