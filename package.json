@@ -7,14 +7,11 @@
     "start": "node app.js"
   },
   "dependencies": {
-    "loopback-datasource-juggler": "1.2.x",
-    "loopback": "1.5.x",
-    "loopback-connector-mysql": "1.1.x",
-    "loopback-push-notification": "~1.1.0"
+    "loopback": "1.x >=1.7.0",
+    "loopback-connector-mysql": "1.1.x"
   },
   "optionalDependencies": {
-    "strong-cluster-control": "~0.2.2",
-    "strong-agent": "~0.2.20",
-    "loopback-explorer": "~1.1.0"
+    "loopback-explorer": "~1.1.0",
+    "loopback-push-notification": "~1.2.0"
   }
 }
