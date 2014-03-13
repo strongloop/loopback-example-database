@@ -22,7 +22,7 @@ dataSource.automigrate('account', function (err) {
         count--;
         if(count === 0) {
           console.log('done');
-          dataSource.disconnect();
+          app.stop();
         }
       }
     });

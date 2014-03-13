@@ -67,7 +67,30 @@
       }
     },
     "public": true,
-    "dataSource": "mysql",
+    "dataSource": "accountDB",
+    "plural": "accounts"
+  },
+  "account2": {
+    "properties": {
+      "id": {
+        "type": "number",
+        "id": true
+      },
+      "email": {
+        "type": "string"
+      },
+      "level": {
+        "type": "number"
+      },
+      "created": {
+        "type": "date"
+      },
+      "modified": {
+        "type": "date"
+      }
+    },
+    "public": true,
+    "dataSource": "account2DB",
     "plural": "accounts"
   }
 }

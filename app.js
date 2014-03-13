@@ -151,7 +151,19 @@ app.start = function() {
       console.log('LoopBack server listening @ %s%s', baseUrl, '/');
     }
   );
-}
+};
+
+app.stop = function() {
+  var dataSources = [];
+  for(var ds in app.dataSources) {
+    // The data sources are stored by more than one keys
+    if(dataSources.indexOf(app.dataSources[ds]) === -1) {
+      dataSources.push(app.dataSources[ds]);
+      app.dataSources[ds].disconnect();
+    }
+  }
+  process.exit(0);
+};
 
 if(require.main === module) {
   app.start();
