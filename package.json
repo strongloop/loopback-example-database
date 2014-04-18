@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "loopback": "1.x >=1.7.0",
-    "loopback-connector-mysql": "1.1.x"
+    "loopback-connector-mysql": "1.x.x"
   },
   "optionalDependencies": {
     "loopback-explorer": "~1.1.0",
