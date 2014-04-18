@@ -1,6 +1,6 @@
 {
-  "name": "loopback-mysql-example",
-  "description": "LoopBack MySQL example",
+  "name": "loopback-example-database",
+  "description": "LoopBack Database example",
   "version": "0.1.0",
   "main": "app.js",
   "scripts": {
