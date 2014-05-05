@@ -1,11 +1,11 @@
 var app = require('./app');
-var dataSource = app.dataSources.mysql;
+var dataSource = app.dataSources.accountDB;
 
-dataSource.discoverSchema('account', {owner: 'demo'}, function (err, schema) {
+dataSource.discoverSchema('ACCOUNT', {owner: 'DEMO'}, function (err, schema) {
   console.log(JSON.stringify(schema, null, '  '));
 });
 
-dataSource.discoverAndBuildModels('account', {owner: 'demo'}, function (err, models) {
+dataSource.discoverAndBuildModels('ACCOUNT', {owner: 'DEMO'}, function (err, models) {
   if (err) {
     console.error(err);
     return;

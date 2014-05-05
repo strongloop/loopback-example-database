@@ -8,10 +8,9 @@
   },
   "dependencies": {
     "loopback": "1.x >=1.7.0",
-    "loopback-connector-mysql": "~1.1.1",
-    "loopback-connector-mongodb": "~1.1.8",
-    "loopback-connector-oracle": "^1.1.5",
-    "async": "~0.2.10"
+    "loopback-connector-mongodb": "~1.2.3",
+    "loopback-connector-oracle": "~1.2.0",
+    "async": "~0.8.0"
   },
   "optionalDependencies": {
     "loopback-explorer": "~1.1.0",
