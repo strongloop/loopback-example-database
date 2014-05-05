@@ -1,5 +1,5 @@
 var app = require('./app');
-var dataSource = app.dataSources.mysql;
+var dataSource = app.dataSources.accountDB;
 
 dataSource.discoverSchema('account', {owner: 'demo'}, function (err, schema) {
     console.log(JSON.stringify(schema, null, '  '));

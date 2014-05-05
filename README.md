@@ -6,6 +6,7 @@ This project contains examples to demonstrate LoopBack connectors for databases:
 - [LoopBack MongoDB connector](https://github.com/strongloop/loopback-connector-mongodb)
 - [LoopBack Oracle connector](https://github.com/strongloop/loopback-connector-oracle)
 - [LoopBack PostgreSQL connector](https://github.com/strongloop/loopback-connector-postgresql)
+- [LoopBack Microsoft SQL Server connector](https://github.com/strongloop/loopback-connector-mssql)
 
 You can pretty much switch between the databases by updating datasources.json and models.json.
 No code change is required. In the following steps, we'll use mysql as the example.
@@ -34,8 +35,8 @@ command:
 ```sh
     slc lb project loopback-mysql-example
     cd loopback-mysql-example
-    slc lb datasource mysql --connector mysql
-    slc lb model account -i --data-source mysql
+    slc lb datasource accountDB --connector mysql
+    slc lb model account -i --data-source accountDB
 ```
 
 Follow the prompts to create your model with the following properties:
@@ -70,7 +71,7 @@ configuration as follows.
 In datasoures.json, replace the data source configuration for mysql with the following snippet:
 
 ```javascript
-    "mysql": {
+    "accountDB": {
     "connector": "mysql",
     "host": "demo.strongloop.com",
     "port": 3306,

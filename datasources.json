@@ -14,7 +14,7 @@
     "defaultForType": "mail",
     "connector": "mail"
   },
-  "mysql": {
+  "accountDB": {
     "connector": "mysql",
     "host": "demo.strongloop.com",
     "port": 3306,
