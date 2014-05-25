@@ -67,7 +67,7 @@
       }
     },
     "public": true,
-    "dataSource": "mysql",
+    "dataSource": "accountDB",
     "plural": "accounts"
   }
 }
