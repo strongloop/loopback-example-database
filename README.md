@@ -11,6 +11,23 @@ This project contains examples to demonstrate LoopBack connectors for databases:
 You can pretty much switch between the databases by updating datasources.json and models.json.
 No code change is required. In the following steps, we'll use mysql as the example.
 
+This repository has multiple branches. Each of them contains the prebuilt 
+configuration and code for the corresponding database which models are attached to.
+
+- [master](/) - for MySQL
+- [mongodb](/tree/mongodb)
+- [mssql](/tree/mongodb)
+- [oracle](/tree/oracle)
+- [postgresql](/tree/postgresql)
+
+To check out the project from github and switch to the mongodb branch,
+
+```sh
+git clone https://github.com/strongloop-community/loopback-example-database.git
+cd loopback-example-databas
+git checkout mongodb
+```
+
 For those who are not familiar with [LoopBack](http://docs.strongloop.com/loopback), it’s an open source mobile backend
 framework that connects mobile devices to enterprise data. LoopBack provides out-of-box data access capabilities for
 models through pluggable [datasources and connectors](http://docs.strongloop.com/loopback-datasource-juggler/#loopback-datasource-and-connector-guide).
