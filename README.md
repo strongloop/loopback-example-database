@@ -14,17 +14,17 @@ No code change is required. In the following steps, we'll use mysql as the examp
 This repository has multiple branches. Each of them contains the prebuilt 
 configuration and code for the corresponding database which models are attached to.
 
-- [master](/) - for MySQL
-- [mongodb](/tree/mongodb)
-- [mssql](/tree/mongodb)
-- [oracle](/tree/oracle)
-- [postgresql](/tree/postgresql)
+- [master](https://github.com/strongloop-community/loopback-example-database/tree/master) - MySQL
+- [mongodb](https://github.com/strongloop-community/loopback-example-database/tree/mongodb) - MongoDB
+- [mssql](https://github.com/strongloop-community/loopback-example-database/tree/mssql) - Microsoft SQL Server
+- [oracle](https://github.com/strongloop-community/loopback-example-database/tree/oracle) - Oracle
+- [postgresql](https://github.com/strongloop-community/loopback-example-database/tree/postgresql) - PostgreSQL
 
 To check out the project from github and switch to the mongodb branch,
 
 ```sh
 git clone https://github.com/strongloop-community/loopback-example-database.git
-cd loopback-example-databas
+cd loopback-example-database
 git checkout mongodb
 ```
 
