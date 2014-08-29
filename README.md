@@ -106,7 +106,7 @@ dataSource.automigrate('account', function(er) {
 
 `Account.create()` inserts two sample records to the MySQL table.
 
-###Run the application
+###Run the Application
 ```sh
 cd .. #change back to the project root, ie) loopback-example-database
 node .
@@ -219,7 +219,8 @@ Following the model definition, existing `accounts` are then displayed:
 The `dataSource.discoverSchema()` method returns the model definition based on the `account` table schema. `dataSource.discoverAndBuildModels()` goes one step further by making the model classes available to perform CRUD operations.
 
 ```javascript
-dataSource.discoverSchema('account', { owner: 'demo' }, function(err, schema) {
+dataSource.discoverSchema('account', { owner: 'demo' }, function(er, schema) {
+  ...
   console.log(JSON.stringify(schema, null, '  '));
 });
 
