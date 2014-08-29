@@ -6,7 +6,8 @@ dataSource.discoverSchema('account', { owner: 'demo' }, function(err, schema) {
 });
 
 dataSource.discoverAndBuildModels('account', { owner: 'demo' },
-    function(err, models) {
+    function(er, models) {
+  if (er) throw er;
   models.Account.find(function(er, accounts) {
     if (er) return console.log(er);
     console.log(accounts);
