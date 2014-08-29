@@ -1,17 +1,20 @@
 {
   "name": "loopback-example-database",
-  "description": "LoopBack Database example",
-  "version": "0.1.0",
-  "main": "app.js",
+  "version": "0.0.0",
+  "main": "server/server.js",
   "scripts": {
-    "start": "node app.js"
+    "pretest": "jshint ."
   },
   "dependencies": {
-    "loopback": "1.x >=1.7.0",
-    "loopback-connector-mysql": "1.x.x"
+    "compression": "^1.0.3",
+    "errorhandler": "^1.1.1",
+    "loopback": "^2.0.0",
+    "loopback-boot": "^2.0.0",
+    "loopback-connector-mysql": "^1.4.5",
+    "loopback-datasource-juggler": "^2.0.0",
+    "serve-favicon": "^2.0.1"
   },
   "optionalDependencies": {
-    "loopback-explorer": "~1.1.0",
-    "loopback-push-notification": "~1.2.0"
+    "loopback-explorer": "^1.1.0"
   }
 }
