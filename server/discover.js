@@ -1,7 +1,8 @@
 var server = require('./server');
 var dataSource = server.dataSources.accountDB;
 
-dataSource.discoverSchema('account', { owner: 'demo' }, function(err, schema) {
+dataSource.discoverSchema('account', { owner: 'demo' }, function(er, schema) {
+  if (er) throw er;
   console.log(JSON.stringify(schema, null, '  '));
 });
 
