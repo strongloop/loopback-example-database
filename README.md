@@ -32,7 +32,7 @@ To demonstrate how to use [LoopBack MySQL Connector](https://github.com/stronglo
 
 ```sh
 slc loopback #create project
-cd loopback-example
+cd loopback-example-database
 npm install --save loopback-connector-mysql #add connector
 ```
 
@@ -40,12 +40,12 @@ npm install --save loopback-connector-mysql #add connector
 To create a datasource named `accountDB`, run:
 
 ```sh
-cd loopback-example
+cd loopback-example-database
 slc loopback:datasource accountDB
 ```
 
 ###Configure the Data Source
-By default, the auto-generated data source uses the [Memory Connector](http://docs.strongloop.com/display/LB/Memory+connector). However, since we're going to connect using MySQL, in `loopback-example/server/datasources.json`, modify the `accountDB` configuration to look like:
+By default, the auto-generated data source uses the [Memory Connector](http://docs.strongloop.com/display/LB/Memory+connector). However, since we're going to connect using MySQL, in `loopback-example-database/server/datasources.json`, modify the `accountDB` configuration to look like:
 
 ```json
 {
@@ -77,13 +77,13 @@ Follow the prompts to create your model with the following properties:
 |created|date|The time of creation for the account|
 |modified|date|The last modification time for the account|
 
-These properties will be saved to `loopback-example/common/models/account.json` once the prompt exits.
+These properties will be saved to `loopback-example-database/common/models/account.json` once the prompt exits.
 
 ###Create the Table and Add Test Data
-Now that we have an `account` model configured, we can generate its corresponding table and fields in the database using the API's provided by [LoopBack](http://loopback.io). Copy `create-test-data.js` from this repository and put it into `loopback-example/server/create-test-data.js`. Run the following to add dummy data to your database:
+Now that we have an `account` model configured, we can generate its corresponding table and fields in the database using the API's provided by [LoopBack](http://loopback.io). Copy `create-test-data.js` from this repository and put it into `loopback-example-database/server/create-test-data.js`. Run the following to add dummy data to your database:
 
 ```sh
-cd loopback-example/server #make sure you're in the server dir
+cd loopback-example-database/server #make sure you're in the server dir
 node create-test-data
 ```
 
@@ -109,8 +109,8 @@ dataSource.automigrate('account', function(er) {
 
 ###Run the application
 ```sh
-cd loopback-example/server #make sure you're in the server dir
-node server
+cd loopback-example-database
+node .
 ```
 
 Browse to [http://localhost:3000/api/accounts](http://localhost:3000/api/accounts) to view the accounts you created in the previous step. You should see:
@@ -147,7 +147,7 @@ To get an account by id, browse to [http://localhost:3000/api/accounts/1](http:/
 Each REST API can be viewed at [http://localhost:3000/explorer](http://localhost:3000/explorer)
 
 ###Discovery
-Now that we have the `account` table created properly in the database, we can discover (reverse engineer) the LoopBack model from the existing database schema. Change to the `loopback-example/server` directory and run:
+Now that we have the `account` table created properly in the database, we can discover (reverse engineer) the LoopBack model from the existing database schema. Change to the `loopback-example-database/server` directory and run:
 
 ```sh
 node discover
