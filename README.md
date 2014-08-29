@@ -28,7 +28,7 @@ npm install -g strongloop
 ```
 
 ###Create the LoopBack Application
-To demonstrate how to use [LoopBack MySQL Connector](https://github.com/strongloop/loopback-connector-mysql), let's create an application from scratch using the `slc` command. Follow the prompt and remember to name your project `loopback-example`. We will also add the connector to this project by using [NPM](https://www.npmjs.org/).
+To demonstrate how to use [LoopBack MySQL Connector](https://github.com/strongloop/loopback-connector-mysql), let's create an application from scratch using the `slc` command. Follow the prompt and remember to name your project `loopback-example-database`. We will also add the connector to this project by using [NPM](https://www.npmjs.org/).
 
 ```sh
 slc loopback #create project
