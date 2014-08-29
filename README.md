@@ -3,16 +3,16 @@ The purpose of this project is to demonstrate the usage of various [LoopBack](ht
 
 |Connector Name|Branch Name|
 |--------------|-----------|
-|[LoopBack Microsoft SQL Server Connector](https://github.com/strongloop/loopback-connector-mssql)|[mssql](https://github.com/strongloop-community/loopback-example-database/tree/mssql)|
-|[LoopBack MongoDB Connector](https://github.com/strongloop/loopback-connector-mongodb)|[mongodb](https://github.com/strongloop-community/loopback-example-database/tree/mongodb)|
-|[LoopBack MySQL Connector](https://github.com/strongloop/loopback-connector-mysql)|[master](https://github.com/strongloop-community/loopback-example-database/tree/master)|
-|[LoopBack Oracle Connector](https://github.com/strongloop/loopback-connector-oracle)|[oracle](https://github.com/strongloop-community/loopback-example-database/tree/oracle)|
-|[LoopBack PostgreSQL Connector](https://github.com/strongloop/loopback-connector-postgresql)|[postgresql](https://github.com/strongloop-community/loopback-example-database/tree/postgresql)|
+|[LoopBack Microsoft SQL Server Connector](https://github.com/strongloop/loopback-connector-mssql)|[mssql](https://github.com/strongloop/loopback-example-database/tree/mssql)|
+|[LoopBack MongoDB Connector](https://github.com/strongloop/loopback-connector-mongodb)|[mongodb](https://github.com/strongloop/loopback-example-database/tree/mongodb)|
+|[LoopBack MySQL Connector](https://github.com/strongloop/loopback-connector-mysql)|[master](https://github.com/strongloop/loopback-example-database/tree/master)|
+|[LoopBack Oracle Connector](https://github.com/strongloop/loopback-connector-oracle)|[oracle](https://github.com/strongloop/loopback-example-database/tree/oracle)|
+|[LoopBack PostgreSQL Connector](https://github.com/strongloop/loopback-connector-postgresql)|[postgresql](https://github.com/strongloop/loopback-example-database/tree/postgresql)|
 
 For example, run the following to view the MongoDB example:
 
 ```sh
-git clone https://github.com/strongloop-community/loopback-example-database.git
+git clone https://github.com/strongloop/loopback-example-database.git
 cd loopback-example-database
 git checkout mongodb
 ```
