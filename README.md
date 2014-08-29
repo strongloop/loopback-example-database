@@ -37,10 +37,9 @@ npm install --save loopback-connector-mysql #add connector
 ```
 
 ###Add a Data Source
-To create a datasource named `accountDB`, run:
+Run the following from the `loopback-example-database` directory to create a data source named `accountDB`:
 
 ```sh
-cd loopback-example-database
 slc loopback:datasource accountDB
 ```
 
@@ -80,10 +79,10 @@ Follow the prompts to create your model with the following properties:
 These properties will be saved to `loopback-example-database/common/models/account.json` once the prompt exits.
 
 ###Create the Table and Add Test Data
-Now that we have an `account` model configured, we can generate its corresponding table and fields in the database using the API's provided by [LoopBack](http://loopback.io). Copy `create-test-data.js` from this repository and put it into `loopback-example-database/server/create-test-data.js`. Run the following to add dummy data to your database:
+Now that we have an `account` model configured, we can generate its corresponding table and fields in the database using the API's provided by [LoopBack](http://loopback.io). Copy `create-test-data.js` from this repository and put it into `loopback-example-database/server/create-test-data.js`. Run the following in `loopback-example-database/server` to add dummy data to your database:
 
 ```sh
-cd loopback-example-database/server #make sure you're in the server dir
+cd server #make sure you're in the server dir
 node create-test-data
 ```
 
@@ -109,7 +108,7 @@ dataSource.automigrate('account', function(er) {
 
 ###Run the application
 ```sh
-cd loopback-example-database
+cd .. #change back to the project root, ie) loopback-example-database
 node .
 ```
 
@@ -150,6 +149,7 @@ Each REST API can be viewed at [http://localhost:3000/explorer](http://localhost
 Now that we have the `account` table created properly in the database, we can discover (reverse engineer) the LoopBack model from the existing database schema. Change to the `loopback-example-database/server` directory and run:
 
 ```sh
+cd server #change back to the server dir
 node discover
 ```
 
