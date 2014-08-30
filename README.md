@@ -134,13 +134,12 @@ Browse to [http://localhost:3000/api/accounts](http://localhost:3000/api/account
 To get an account by id, browse to [http://localhost:3000/api/accounts/1](http://localhost:3000/api/accounts/1).
 
 ```json
-    {
-      "email": "foo@bar.com",
-      "level": 10,
-      "created": "2013-10-15T21:34:50.000Z", #yours will be different
-      "modified": "2013-10-15T21:34:50.000Z", #yours will be different
-      "id": "1"
-    }
+{
+  "email": "foo@bar.com",
+  "created": "2014-08-28T22:56:28.000Z", #yours will be different
+  "modified": "2014-08-28T22:56:28.000Z", #yours will be different
+  "id": 1
+}
 ```
 
 Each REST API can be viewed at [http://localhost:3000/explorer](http://localhost:3000/explorer)
