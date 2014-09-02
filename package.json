@@ -6,6 +6,7 @@
     "pretest": "jshint ."
   },
   "dependencies": {
+    "async": "^0.9.0",
     "compression": "^1.0.3",
     "errorhandler": "^1.1.1",
     "loopback": "^2.0.0",
