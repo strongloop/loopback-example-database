@@ -11,5 +11,14 @@
     "database": "XE",
     "username": "demo",
     "password": "L00pBack"
+  },
+  "account2DB": {
+    "name": "account2DB",
+    "connector": "mongodb",
+    "host": "demo.strongloop.com",
+    "port": 27017,
+    "database": "demo",
+    "username": "demo",
+    "password": "L00pBack"
   }
 }
