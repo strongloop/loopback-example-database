@@ -40,7 +40,7 @@ async.series([
   },
   function(cb) {
     console.log('4. Finding accounts from DB1');
-    Account.find(function (er, accounts) {
+    Account.find(function(er, accounts) {
       if (er) return cb(er);
       console.log('Accounts found from DB1: ', accounts);
       console.log('5. Creating accounts in DB2');
@@ -49,7 +49,7 @@ async.series([
   },
   function (cb) {
     console.log('6. Finding accounts from DB2');
-    Account2.find(function (er, accounts) {
+    Account2.find(function(er, accounts) {
       if (er) return cb(er);
       console.log('Accounts found from DB2: ', accounts);
       cb();
