@@ -243,6 +243,44 @@ dataSource.discoverAndBuildModels('ACCOUNT', { owner: 'DEMO' }, function(er, mod
 });
 ```
 
+###Data Synchronization
+An extra example of data synchronization is shown in `sync-data.js`. In the `server` directory, run:
+
+```
+node sync-data.js
+```
+
+You should see the following output:
+
+```
+Synchronization is now started.
+1. Auto-migrating accounts for DB1
+2. Removing accounts from DB2
+3. Creating accounts in DB1
+4. Finding accounts from DB1
+Accounts found from DB1:  [ { email: 'foo@bar.com',
+    created: Tue Sep 02 2014 16:49:43 GMT-0700 (PDT),
+    modified: Tue Sep 02 2014 16:49:43 GMT-0700 (PDT),
+    id: 1 },
+  { email: 'bar@bar.com',
+    created: Tue Sep 02 2014 16:49:43 GMT-0700 (PDT),
+    modified: Tue Sep 02 2014 16:49:43 GMT-0700 (PDT),
+    id: 2 } ]
+5. Creating accounts in DB2
+6. Finding accounts from DB2
+Accounts found from DB2:  [ { email: 'foo@bar.com',
+    created: Tue Sep 02 2014 16:49:43 GMT-0700 (PDT),
+    modified: Tue Sep 02 2014 16:49:43 GMT-0700 (PDT),
+    id: 1 },
+  { email: 'bar@bar.com',
+    created: Tue Sep 02 2014 16:49:43 GMT-0700 (PDT),
+    modified: Tue Sep 02 2014 16:49:43 GMT-0700 (PDT),
+    id: 2 } ]
+Synchronization is completed.
+```
+
+Please follow the comments in `sync-data.js` for detailed descriptions for each step.
+
 ##Conclusion
 As you can see, the Oracle connector for LoopBack enables applications to work with data in Oracle databases. It can be newly generated data from mobile devices that need to be persisted or existing data that need to be shared between mobile clients and other backend applications. No matter where you start, [LoopBack](http://loopback.io) makes it easy to handle your data with Oracle. It’s great to have Oracle in the Loop!
 
