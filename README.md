@@ -28,7 +28,7 @@ npm install -g strongloop
 ```
 
 ###Create the LoopBack Application
-To demonstrate how to use [LoopBack Oracle Connector](https://github.com/strongloop/loopback-connector-oracle), let's create an application from scratch using the `slc` command. Follow the prompt and remember to name your project `loopback-example-database`. We will also add the connector to this project by using [NPM](https://www.npmjs.org/).
+To demonstrate how to use the [LoopBack Oracle Connector](https://github.com/strongloop/loopback-connector-oracle), let's create an application from scratch using the `slc` command. Follow the prompt and remember to name your project `loopback-example-database`. We will also add the connector to this project by using [NPM](https://www.npmjs.org/).
 
 ```sh
 slc loopback #create project
@@ -53,7 +53,7 @@ Example:
 ...
 ```
 
-However, this is a deprecated feature from LoopBack 1.x (we will remove this message in a future update). Due to concerns raised in the past regarding the "invasiveness" of automatic PATH modification), we now generate a file in your home directory named `strong-oracle.rc`, which includes the export startment from above. You must **manually** include this file in your startup file by adding this line (to your .bashrc, .bash_profile, etc):
+However, this is a deprecated feature from LoopBack 1.x (we will remove this message in a future update). Due to concerns raised in the past regarding the "invasiveness" of automatic PATH modification), we now generate a file in your home directory named `strong-oracle.rc`, which includes the export startment from above. So let's **manually include this file** by adding the following (to your .bashrc, .bash_profile, etc):
 
 ```
 source $HOME/strong-oracle.rc
