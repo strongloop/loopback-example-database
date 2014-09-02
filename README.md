@@ -36,7 +36,14 @@ cd loopback-example-database
 npm install --save loopback-connector-oracle #add connector
 ```
 
-*As a part of the installation process, you will see this message:*
+Add the following to your startup file:
+
+```
+source $HOME/strong-oracle.rc
+```
+
+####Automatic PATH Modification
+As a part of the installation process, you will see this message:
 
 ```
 ...
@@ -53,13 +60,7 @@ Example:
 ...
 ```
 
-*However, this is a deprecated feature from LoopBack 1.x (we will remove this message in a future update). Due to concerns raised in the past regarding the "invasiveness" of automatic PATH modification, we now generate a file in your home directory named `strong-oracle.rc` instead.  This file is meant to be sourced into your startup file (.bashrc, .bash_profile, etc) manually.*
-
-Add the following to your startup file:
-
-```
-source $HOME/strong-oracle.rc
-```
+However, this is a **deprecated** feature from LoopBack 1.x (we will remove this message in a future update). Due to concerns raised in the past regarding the "invasiveness" of automatic PATH modification, we now generate a file in your home directory named `strong-oracle.rc` instead.  This file is meant to be sourced into your startup file (.bashrc, .bash_profile, etc) manually.
 
 ###Add a Data Source
 Run the following from the `loopback-example-database` directory to create a data source named `accountDB`:
