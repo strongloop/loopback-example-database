@@ -10,7 +10,7 @@
     "errorhandler": "^1.1.1",
     "loopback": "^2.0.0",
     "loopback-boot": "^2.0.0",
-    "loopback-connector-mysql": "^1.4.5",
+    "loopback-connector-oracle": "^1.4.2",
     "loopback-datasource-juggler": "^2.0.0",
     "serve-favicon": "^2.0.1"
   },
