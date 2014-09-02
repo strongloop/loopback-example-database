@@ -53,7 +53,9 @@ Example:
 ...
 ```
 
-However, this is a deprecated feature from LoopBack 1.x (we will remove this message in a future update). Due to concerns raised in the past regarding the "invasiveness" of automatic PATH modification, we now generate a file in your home directory named `strong-oracle.rc` instead.  This file is meant to be sourced into your startup file (.bashrc, .bash_profile, etc) manually. So let's do that by adding the following to your startup file:
+However, this is a deprecated feature from LoopBack 1.x (we will remove this message in a future update). Due to concerns raised in the past regarding the "invasiveness" of automatic PATH modification, we now generate a file in your home directory named `strong-oracle.rc` instead.  This file is meant to be sourced into your startup file (.bashrc, .bash_profile, etc) manually.
+
+So let's do that now by adding the following to your startup file:
 
 ```
 source $HOME/strong-oracle.rc
