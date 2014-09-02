@@ -1,0 +1,15 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "accountDB": {
+    "name": "accountDB",
+    "connector": "oracle",
+    "host": "demo.strongloop.com",
+    "port": 1521,
+    "database": "XE",
+    "username": "demo",
+    "password": "L00pBack"
+  }
+}

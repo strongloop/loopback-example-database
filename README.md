@@ -1,171 +1,181 @@
-# loopback-example-database
+#loopback-example-database
+The purpose of this project is to demonstrate the usage of various [LoopBack](http://loopback.io) database connectors. Each branch in this repository contains a prebuilt configuration for a specific connector.
 
-This project contains examples to demonstrate LoopBack connectors for databases:
+|Connector Name|Branch Name|
+|--------------|-----------|
+|[LoopBack Microsoft SQL Server Connector](https://github.com/strongloop/loopback-connector-mssql)|[mssql](https://github.com/strongloop/loopback-example-database/tree/mssql)|
+|[LoopBack MongoDB Connector](https://github.com/strongloop/loopback-connector-mongodb)|[mongodb](https://github.com/strongloop/loopback-example-database/tree/mongodb)|
+|[LoopBack MySQL Connector](https://github.com/strongloop/loopback-connector-mysql)|[master](https://github.com/strongloop/loopback-example-database/tree/master)|
+|[LoopBack Oracle Connector](https://github.com/strongloop/loopback-connector-oracle)|[oracle](https://github.com/strongloop/loopback-example-database/tree/oracle)|
+|[LoopBack PostgreSQL Connector](https://github.com/strongloop/loopback-connector-postgresql)|[postgresql](https://github.com/strongloop/loopback-example-database/tree/postgresql)|
 
-- [LoopBack Oracle connector](https://github.com/strongloop/loopback-connector-oracle)
-- [LoopBack MySQL connector](https://github.com/strongloop/loopback-connector-mysql)
-- [LoopBack MongoDB connector](https://github.com/strongloop/loopback-connector-mongodb)
-- [LoopBack PostgreSQL connector](https://github.com/strongloop/loopback-connector-postgresql)
-- [LoopBack Microsoft SQL Server connector](https://github.com/strongloop/loopback-connector-mssql)
-
-You can pretty much switch between the databases by updating datasources.json and models.json.
-No code change is required. In the following steps, we'll use oracle as the example.
-
-For those who are not familiar with [LoopBack](http://docs.strongloop.com/loopback), it’s an open source mobile backend
-framework that connects mobile devices to enterprise data. LoopBack provides out-of-box data access capabilities for
-models through pluggable [datasources and connectors](http://docs.strongloop.com/loopback-datasource-juggler/#loopback-datasource-and-connector-guide).
-Connectors provide connectivity to variable backend systems, such as databases or REST APIs. Models are in turn exposed
-to mobile devices as REST APIs and SDKs.
-
-## Prerequisite
-
-First, make sure you have strong-cli installed.
+For example, run the following to view the MongoDB example:
 
 ```sh
-    npm install -g strong-cli
+git clone https://github.com/strongloop/loopback-example-database.git
+cd loopback-example-database
+git checkout mongodb
 ```
 
-Next, you need a running MySQL server. In this article, you'll connect to an instance running on demo.strongloop.com.
+##Getting Started
+In this example, we will demonstrate the usage of the [LoopBack Oracle Connector](https://github.com/strongloop/loopback-connector-oracle). Instead of setting up your own database instance to connect to (which you would normally do), we will be connecting to an preconfigured Oracle instance running at demo.strongloop.com.
 
-## Create the LoopBack application
-
-To demonstrate how to use MySQL connector for LoopBack, we'll create a simple application from scratch using the `slc`
-command:
+###Prerequisites
+We will need the [slc](https://github.com/strongloop/strongloop) (StrongLoop Controller) command line tool to simplify various tasks in the example.
 
 ```sh
-    slc lb project loopback-oracle-example
-    cd loopback-oracle-example
-    slc lb datasource accountDB --connector oracle
-    slc lb model account -i --data-source accountDB
+npm install -g strongloop
+```
+
+###Create the LoopBack Application
+To demonstrate how to use the [LoopBack Oracle Connector](https://github.com/strongloop/loopback-connector-oracle), let's create an application from scratch using the `slc` command. Follow the prompt and remember to name your project `loopback-example-database`. We will also add the connector to this project by using [NPM](https://www.npmjs.org/).
+
+```sh
+slc loopback #create project
+cd loopback-example-database
+npm install --save loopback-connector-oracle #add connector
+```
+
+Add the following to your startup file:
+
+```
+source $HOME/strong-oracle.rc
+```
+
+####Automatic PATH Modification
+As a part of the installation process, you will see this message:
+
+```
+...
+---------------------------------------------------------------------------
+The node-oracle module and the Oracle specific libraries have been
+installed in /Users/sh/repos/loopback-example-database/node_modules/loopback-connector-oracle/node_modules/loopback-oracle-installer.
+
+The default bashrc (/etc/bashrc) or user's bash_profile (~/.bash_profile)
+paths have been modified to use this path. If you use a shell other than
+bash, please remember to set the DYLD_LIBRARY_PATH prior to using node.
+
+Example:
+  $ export DYLD_LIBRARY_PATH=":/Users/$USER/repos/loopback-example-database/node_modules/loopback-connector-oracle/node_modules/instantclient:/Users/$USER/repos/loopback-example-database/node_modules/loopback-connector-oracle/node_modules/instantclient"
+...
+```
+
+However, this is a **deprecated** feature from LoopBack 1.x (we will remove this message in a future update). Due to concerns raised in the past regarding the "invasiveness" of automatic PATH modification, we now generate a file in your home directory named `strong-oracle.rc` instead.  This file is meant to be sourced into your startup file (.bashrc, .bash_profile, etc) **manually**.
+
+###Add a Data Source
+Run the following from the `loopback-example-database` directory to create a data source named `accountDB`:
+
+```sh
+slc loopback:datasource accountDB
+```
+
+###Configure the Data Source
+By default, the auto-generated data source uses the [Memory Connector](http://docs.strongloop.com/display/LB/Memory+connector). However, since we're going to connect using Oracle, in `loopback-example-database/server/datasources.json`, modify the `accountDB` configuration to look like:
+
+```json
+{
+  ...
+  "accountDB": {
+    "name": "accountDB",
+    "connector": "oracle",
+    "host": "demo.strongloop.com",
+    "port": 1521,
+    "database": "XE",
+    "username": "demo",
+    "password": "L00pBack"
+  }
+}
+```
+
+###Add a Model
+Once we have the data source configured properly, we can create an account model by running:
+
+```sh
+slc loopback:model account
 ```
 
 Follow the prompts to create your model with the following properties:
 
-- email: string - The email id for the account
-- level: number - The game level you are in
-- created: date - The date your account is created
-- modified: date - The date your account is updated
+|Property|Data Type|Description|
+|--------|---------|-----------|
+|email|string|The email id for the account|
+|created|date|The time of creation for the account|
+|modified|date|The last modification time for the account|
 
-The properties will be saved to models.json.
+These properties will be saved to `loopback-example-database/common/models/account.json` once the prompt exits.
 
-
-## Install dependencies
-
-Let's add the `loopback-connector-oracle` module and install the dependencies.
-
-```sh
-    npm install loopback-connector-oracle --save
-```
-
-## Configure the data source
-
-The generated data source use the memory connector by default, to connect to MySQL, we'll modify the data source
-configuration as follows.
+###Create the Table and Add Test Data
+Now that we have an `account` model configured, we can generate its corresponding table and fields in the database using the API's provided by [LoopBack](http://loopback.io). Copy `create-test-data.js` from this repository and put it into `loopback-example-database/server/create-test-data.js`. Run the following in `loopback-example-database/server` to add dummy data to your database:
 
 ```sh
-    vi datasources.json
+cd server #make sure you're in the server dir
+node create-test-data
 ```
 
-**Note: Future releases will probably generate a config.json file for the data source configuration.**
+This script will add two accounts into your database.
 
-In datasoures.json, replace the data source configuration for oracle with the following snippet:
-
+####create-test-data.js
 ```javascript
-    "accountDB": {
-    "connector": "oracle",
-    "host": "demo.strongloop.com",
-    "port": 3306,
-    "database": "demo",
-    "username": "demo",
-    "password": "L00pBack"
-  }
-```
-
-## Create the table and add test data
-
-Now we have an `account` model in LoopBack, do we need to run some SQL statements to create the corresponding table in
-MySQL database?
-
-Sure, but even simpler, LoopBack provides Node.js APIs to do so automatically. The code is `create-test-data.js`.
-
-```sh
-    node create-test-data
-```
-
-Let's look at the code:
-
-```javascript
-    dataSource.automigrate('account', function (err) {
-      accounts.forEach(function(act) {
-        Account.create(act, function(err, result) {
-          if(!err) {
-            console.log('Record created:', result);
-          }
-        });
-      });
+dataSource.automigrate('account', function(er) {
+  ...
+  accounts.forEach(function(account) {
+    Account.create(account, function(er, result) {
+      if (!er) return;
+      console.log('Record created:', result);
+      ...
     });
+  });
+});
 ```
 
-`dataSource.automigrate()` creates or recreates the table in MySQL based on the model definition for `account`. Please
-note **the call will drop the table if it exists and your data will be lost**. We can use `dataSource.autoupdate()` instead
-to keep the existing data.
+`dataSource.automigrate()` creates or recreates a table in Oracle based on the model definition for `account`. This means **if the table already exists, it will be dropped and all of its existing data will be lost**. If you want to keep the existing data, use `dataSource.autoupdate()` instead.
 
-`Account.create()` inserts two sample records to the MySQL table.
+`Account.create()` inserts two sample records to the Oracle table.
 
-
-## Run the application
-
+###Run the Application
 ```sh
-    node app
+cd .. #change back to the project root, ie) loopback-example-database
+node .
 ```
 
-Open your browser now.
-
-To get all accounts, go to http://localhost:3000/api/accounts.
+Browse to [http://localhost:3000/api/accounts](http://localhost:3000/api/accounts) to view the accounts you created in the previous step. You should see:
 
 ```json
-    [
-      {
-        "email": "foo@bar.com",
-        "level": 10,
-        "created": "2013-10-15T21:34:50.000Z",
-        "modified": "2013-10-15T21:34:50.000Z",
-        "id": 1
-      },
-      {
-        "email": "bar@bar.com",
-        "level": 20,
-        "created": "2013-10-15T21:34:50.000Z",
-        "modified": "2013-10-15T21:34:50.000Z",
-        "id": 2
-      }
-    ]
+[
+  {
+    "email": "foo@bar.com",
+    "created": "2014-08-28T22:56:28.000Z", #yours will be different
+    "modified": "2014-08-28T22:56:28.000Z", #yours will be different
+    "id": 1
+  },
+  {
+    "email": "bar@bar.com",
+    "created": "2014-08-28T22:56:28.000Z", #yours will be different
+    "modified": "2014-08-28T22:56:28.000Z", #yours will be different
+    "id": 2
+  }
+]
 ```
 
-To get an account by id, go to http://localhost:3000/api/accounts/1.
+To get an account by id, browse to [http://localhost:3000/api/accounts/1](http://localhost:3000/api/accounts/1).
 
 ```json
-    {
-      "email": "foo@bar.com",
-      "level": 10,
-      "created": "2013-10-15T21:34:50.000Z",
-      "modified": "2013-10-15T21:34:50.000Z",
-      "id": "1"
-    }
+{
+  "email": "foo@bar.com",
+  "created": "2014-08-28T22:56:28.000Z", #yours will be different
+  "modified": "2014-08-28T22:56:28.000Z", #yours will be different
+  "id": 1
+}
 ```
 
-All the REST APIs can be explored at:
+Each REST API can be viewed at [http://localhost:3000/explorer](http://localhost:3000/explorer)
 
-    http://127.0.0.1:3000/explorer
-
-
-## Try the discovery
-
-Now we have the `account` table existing in MySQL, we can try to discover the LoopBack model from the database. Let's
-run the following example:
+###Discovery
+Now that we have the `account` table created properly in the database, we can discover (reverse engineer) the LoopBack model from the existing database schema. Change to the `loopback-example-database/server` directory and run:
 
 ```sh
-    node discover
+cd server #change back to the server dir
+node discover
 ```
 
 First, we'll see the model definition for `account` in JSON format.
@@ -176,84 +186,65 @@ First, we'll see the model definition for `account` in JSON format.
   "options": {
     "idInjection": false,
     "oracle": {
-      "schema": "demo",
-      "table": "account"
+      "schema": "DEMO",
+      "table": "ACCOUNT"
     }
   },
   "properties": {
-    "id": {
-      "type": "Number",
-      "required": false,
-      "length": null,
-      "precision": 10,
-      "scale": 0,
-      "id": 1,
-      "oracle": {
-        "columnName": "id",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
-        "nullable": "NO"
-      }
-    },
     "email": {
       "type": "String",
       "required": false,
-      "length": 765,
+      "length": 1024,
       "precision": null,
       "scale": null,
       "oracle": {
-        "columnName": "email",
-        "dataType": "varchar",
-        "dataLength": 765,
+        "columnName": "EMAIL",
+        "dataType": "VARCHAR2",
+        "dataLength": 1024,
         "dataPrecision": null,
         "dataScale": null,
-        "nullable": "YES"
+        "nullable": "Y"
       }
     },
     ...
-    }
   }
 }
 ```
 
-Then we use the model to find all accounts from Oracle:
+Following the model definition, existing `accounts` are then displayed:
 
 ```json
-[ { id: 1,
-    email: 'foo@bar.com',
-    level: 10,
-    created: Tue Oct 15 2013 14:34:50 GMT-0700 (PDT),
-    modified: Tue Oct 15 2013 14:34:50 GMT-0700 (PDT) },
-  { id: 2,
-    email: 'bar@bar.com',
-    level: 20,
-    created: Tue Oct 15 2013 14:34:50 GMT-0700 (PDT),
-    modified: Tue Oct 15 2013 14:34:50 GMT-0700 (PDT) } ]
+[ { email: 'foo@bar.com',
+    created: Tue Sep 02 2014 11:48:36 GMT-0700 (PDT),
+    modified: Tue Sep 02 2014 11:48:36 GMT-0700 (PDT),
+    id: 1 },
+  { email: 'bar@bar.com',
+    created: Tue Sep 02 2014 11:48:36 GMT-0700 (PDT),
+    modified: Tue Sep 02 2014 11:48:36 GMT-0700 (PDT),
+    id: 2 } ]
 ```
 
-Let's examine the code in discover.js too. It's surprisingly simple! The `dataSource.discoverSchema()` method returns the
-model definition based on the `account` table schema. `dataSource.discoverAndBuildModels()` goes one step further by making
-the model classes available to perform CRUD operations.
+####discover.js
+The `dataSource.discoverSchema()` method returns the model definition based on the `account` table schema. `dataSource.discoverAndBuildModels()` goes one step further by making the model classes available to perform CRUD operations.
 
 ```javascript
-    dataSource.discoverSchema('account', {owner: 'demo'}, function (err, schema) {
-        console.log(JSON.stringify(schema, null, '  '));
-    });
+dataSource.discoverSchema('ACCOUNT', { owner: 'DEMO' }, function(er, schema) {
+  ...
+  console.log(JSON.stringify(schema, null, '  '));
+});
 
-    dataSource.discoverAndBuildModels('account', {}, function (err, models) {
-        models.Account.find(function (err, act) {
-            if (err) {
-                console.error(err);
-            } else {
-                console.log(act);
-            }
-        });
-    });
+dataSource.discoverAndBuildModels('ACCOUNT', { owner: 'DEMO' }, function(er, models) {
+  ...
+  models.Account.find(function(er, accounts) {
+    if (er) return console.log(er);
+    console.log(accounts);
+    dataSource.disconnect();
+  });
+});
 ```
 
-As you have seen, the Oracle connector for LoopBack enables applications to work with data in Oracle databases.
-It can be new data generated by mobile devices that need to be persisted, or existing data that need to be shared
-between mobile clients and other backend applications.  No matter where you start, LoopBack makes it easy to handle
-your data with Oracle. It’s great to have Oracle in the Loop!
+##Conclusion
+As you can see, the Oracle connector for LoopBack enables applications to work with data in Oracle databases. It can be newly generated data from mobile devices that need to be persisted or existing data that need to be shared between mobile clients and other backend applications. No matter where you start, [LoopBack](http://loopback.io) makes it easy to handle your data with Oracle. It’s great to have Oracle in the Loop!
+
+##LoopBack
+[LoopBack](http://docs.strongloop.com/loopback) is an open source mobile backend framework that connects mobile devices to enterprise data. It provides out-of-box data access capabilities for models through pluggable [datasources and connectors](http://docs.strongloop.com/loopback-datasource-juggler/#loopback-datasource-and-connector-guide). Connectors provide connectivity to various backend systems (such as databases or REST APIs). Models are in turn exposed to mobile devices as REST APIs and SDKs. For more information, see [https://github.com/strongloop/loopback](https://github.com/strongloop/loopback).
