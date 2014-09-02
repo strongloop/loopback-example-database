@@ -5,10 +5,10 @@
   },
   "accountDB": {
     "name": "accountDB",
-    "connector": "mysql",
+    "connector": "oracle",
     "host": "demo.strongloop.com",
-    "port": 3306,
-    "database": "demo",
+    "port": 1521,
+    "database": "XE",
     "username": "demo",
     "password": "L00pBack"
   }
