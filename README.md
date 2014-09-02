@@ -244,7 +244,7 @@ dataSource.discoverAndBuildModels('ACCOUNT', { owner: 'DEMO' }, function(er, mod
 ```
 
 ###Data Synchronization
-An example of data synchronization is shown in `sync-data.js`. In the `server` directory, run:
+An example of data synchronization is shown in `server/sync-data.js`. In the `server` directory, run:
 
 ```
 node sync-data.js
