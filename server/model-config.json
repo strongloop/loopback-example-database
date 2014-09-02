@@ -27,5 +27,9 @@
   "account": {
     "public": true,
     "dataSource": "accountDB"
+  },
+  "account2": {
+    "public": true,
+    "dataSource": "account2DB"
   }
 }
