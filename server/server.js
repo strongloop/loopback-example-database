@@ -37,6 +37,14 @@ app.start = function() {
   });
 };
 
+app.stop = function() {
+  var dataSources = Object.keys(app.dataSources);
+  dataSources.forEach(function(ds) {
+    app.dataSources[ds].disconnect();
+  });
+  process.exit(0);
+};
+
 // start the server if `$ node server.js`
 if (require.main === module) {
   app.start();
