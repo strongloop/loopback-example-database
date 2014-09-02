@@ -36,6 +36,27 @@ cd loopback-example-database
 npm install --save loopback-connector-mysql #add connector
 ```
 
+As a part of the installation process, you will see this message:
+
+```
+...
+---------------------------------------------------------------------------
+The node-oracle module and the Oracle specific libraries have been
+installed in /Users/sh/repos/loopback-example-database/node_modules/loopback-connector-oracle/node_modules/loopback-oracle-installer.
+
+The default bashrc (/etc/bashrc) or user's bash_profile (~/.bash_profile)
+paths have been modified to use this path. If you use a shell other than
+bash, please remember to set the DYLD_LIBRARY_PATH prior to using node.
+
+Example:
+  $ export DYLD_LIBRARY_PATH=":/Users/$USER/repos/loopback-example-database/node_modules/loopback-connector-oracle/node_modules/instantclient:/Users/$USER/repos/loopback-example-database/node_modules/loopback-connector-oracle/node_modules/instantclient"
+...
+```
+
+As noted, your default bash startup file (.bashrc for linux, .bash_profile for OSX, etc) will be modified to use the path shown.
+
+**$USER will different the the current user on your system.**
+
 ###Add a Data Source
 Run the following from the `loopback-example-database` directory to create a data source named `accountDB`:
 
