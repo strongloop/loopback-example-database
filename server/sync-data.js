@@ -1,28 +1,24 @@
-var app = require('./app');
+var server = require('./server');
 var async = require('async');
 
 // First data source - oracle
-var dataSource = app.dataSources.accountDB;
-
-// Second data source - mongodb
-var dataSource2 = app.dataSources.account2DB;
+var dataSource = server.dataSources.accountDB;
 
 // Oracle account
-var Account = app.models.account;
+var Account = server.models.account;
 
 // MongoDB account
-var Account2 = app.models.account2;
+var Account2 = server.models.account2;
 
 // Dummy data
 var accounts = [
-  { email: "foo@bar.com",
-    level: 10,
+  {
+    email: 'foo@bar.com',
     created: new Date(),
     modified: new Date()
   },
   {
-    email: "bar@bar.com",
-    level: 20,
+    email: 'bar@bar.com',
     created: new Date(),
     modified: new Date()
   }
@@ -30,24 +26,22 @@ var accounts = [
 
 console.log('Synchronization is now started.');
 async.series([
-  function (cb) {
+  function(cb) {
     console.log('1. Auto-migrating accounts for DB1');
     dataSource.automigrate('account', cb);
   },
-  function (cb) {
+  function(cb) {
     console.log('2. Removing accounts from DB2');
     Account2.destroyAll(cb);
   },
-  function (cb) {
+  function(cb) {
     console.log('3. Creating accounts in DB1');
     async.each(accounts, Account.create.bind(Account), cb);
   },
-  function (cb) {
+  function(cb) {
     console.log('4. Finding accounts from DB1');
-    Account.find(function (err, accounts) {
-      if (err) {
-        return cb(err);
-      }
+    Account.find(function(er, accounts) {
+      if (er) return cb(er);
       console.log('Accounts found from DB1: ', accounts);
       console.log('5. Creating accounts in DB2');
       async.each(accounts, Account2.create.bind(Account2), cb);
@@ -55,19 +49,14 @@ async.series([
   },
   function (cb) {
     console.log('6. Finding accounts from DB2');
-    Account2.find(function (err, accounts) {
-      if (err) {
-        return cb(err);
-      }
+    Account2.find(function(er, accounts) {
+      if (er) return cb(er);
       console.log('Accounts found from DB2: ', accounts);
       cb();
     });
   }
-], function (err, results) {
-  if (err) {
-    console.error(err);
-  }
+], function(er) {
+  if (er) return console.log(er);
   console.log('Synchronization is completed.');
-  app.stop();
+  server.stop();
 });
-

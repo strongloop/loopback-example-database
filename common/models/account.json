@@ -1,0 +1,19 @@
+{
+  "name": "account",
+  "base": "PersistedModel",
+  "properties": {
+    "email": {
+      "type": "string"
+    },
+    "created": {
+      "type": "date"
+    },
+    "modified": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}

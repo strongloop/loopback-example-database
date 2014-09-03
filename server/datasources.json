@@ -1,0 +1,24 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "accountDB": {
+    "host": "demo.strongloop.com",
+    "port": 1521,
+    "database": "XE",
+    "username": "demo",
+    "password": "L00pBack",
+    "name": "accountDB",
+    "connector": "oracle"
+  },
+  "account2DB": {
+    "host": "demo.strongloop.com",
+    "port": 27017,
+    "database": "demo",
+    "username": "demo",
+    "password": "L00pBack",
+    "name": "account2DB",
+    "connector": "mongodb"
+  }
+}
