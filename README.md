@@ -1,5 +1,4 @@
-#loopback-example-database
-The purpose of this project is to demonstrate the usage of various [LoopBack](http://loopback.io) database connectors. Each branch in this repository contains a prebuilt configuration for a specific connector.
+This module demonstrates using various [LoopBack](http://loopback.io) database connectors. Each branch in this repository contains a prebuilt configuration for a specific connector.
 
 |Connector Name|Branch Name|
 |--------------|-----------|
@@ -18,7 +17,7 @@ git checkout mongodb
 ```
 
 ##Getting Started
-In this example, we will demonstrate the usage of the [LoopBack MySQL Connector](https://github.com/strongloop/loopback-connector-mysql). Instead of setting up your own database instance to connect to (which you would normally do), we will be connecting to an preconfigured MySQL instance running at demo.strongloop.com.
+This example demonstrates use of the [LoopBack MySQL Connector](https://github.com/strongloop/loopback-connector-mysql). Instead of setting up your own database instance to connect to (which you would normally do), we will be connecting to an preconfigured MySQL instance running at demo.strongloop.com.
 
 ###Prerequisites
 We will need the [slc](https://github.com/strongloop/strongloop) (StrongLoop Controller) command line tool to simplify various tasks in the example.
@@ -27,7 +26,7 @@ We will need the [slc](https://github.com/strongloop/strongloop) (StrongLoop Con
 npm install -g strongloop
 ```
 
-###Create the LoopBack Application
+###Create the LoopBack application
 To demonstrate how to use [LoopBack MySQL Connector](https://github.com/strongloop/loopback-connector-mysql), let's create an application from scratch using the `slc` command. Follow the prompt and remember to name your project `loopback-example-database`. We will also add the connector to this project by using [NPM](https://www.npmjs.org/).
 
 ```sh
@@ -78,7 +77,7 @@ Follow the prompts to create your model with the following properties:
 
 These properties will be saved to `loopback-example-database/common/models/account.json` once the prompt exits.
 
-###Create the Table and Add Test Data
+###Create the table and add test data
 Now that we have an `account` model configured, we can generate its corresponding table and fields in the database using the API's provided by [LoopBack](http://loopback.io). Copy `create-test-data.js` from this repository and put it into `loopback-example-database/server/create-test-data.js`. Run the following in `loopback-example-database/server` to add dummy data to your database:
 
 ```sh
@@ -106,7 +105,7 @@ dataSource.automigrate('account', function(er) {
 
 `Account.create()` inserts two sample records to the MySQL table.
 
-###Run the Application
+###Run the application
 ```sh
 cd .. #change back to the project root, ie) loopback-example-database
 node .
@@ -232,9 +231,3 @@ dataSource.discoverAndBuildModels('account', { owner: 'demo' }, function(er, mod
   });
 });
 ```
-
-##Conclusion
-As you can see, the MySQL connector for LoopBack enables applications to work with data in MySQL databases. It can be newly generated data from mobile devices that need to be persisted or existing data that need to be shared between mobile clients and other backend applications. No matter where you start, [LoopBack](http://loopback.io) makes it easy to handle your data with MySQL. It’s great to have MySQL in the Loop!
-
-##LoopBack
-[LoopBack](http://docs.strongloop.com/loopback) is an open source mobile backend framework that connects mobile devices to enterprise data. It provides out-of-box data access capabilities for models through pluggable [datasources and connectors](http://docs.strongloop.com/loopback-datasource-juggler/#loopback-datasource-and-connector-guide). Connectors provide connectivity to various backend systems (such as databases or REST APIs). Models are in turn exposed to mobile devices as REST APIs and SDKs. For more information, see [https://github.com/strongloop/loopback](https://github.com/strongloop/loopback).
