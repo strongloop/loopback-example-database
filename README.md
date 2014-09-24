@@ -1,4 +1,6 @@
-This module demonstrates using various [LoopBack](http://loopback.io) database connectors. Each branch in this repository contains a prebuilt configuration for a specific connector.
+##Overview
+
+This module demonstrates using various [LoopBack](http://loopback.io) database connectors. Each branch in the repository contains a prebuilt configuration for a specific connector.
 
 |Connector Name|Branch Name|
 |--------------|-----------|
@@ -16,17 +18,16 @@ cd loopback-example-database
 git checkout mongodb
 ```
 
-##Getting Started
-This example demonstrates use of the [LoopBack MySQL Connector](https://github.com/strongloop/loopback-connector-mysql). Instead of setting up your own database instance to connect to (which you would normally do), we will be connecting to an preconfigured MySQL instance running at demo.strongloop.com.
+### Example: MySQL
 
-###Prerequisites
-We will need the [slc](https://github.com/strongloop/strongloop) (StrongLoop Controller) command line tool to simplify various tasks in the example.
+This example procedure below demonstrates using the [LoopBack MySQL Connector](http://docs.strongloop.com/display/LB/MySQL+connector).   Using other datbase connectors is similar.  Instead of connecting to your own database instance (which you would normally do), this example shows how to 
+connect to an preconfigured MySQL instance running at demo.strongloop.com.
 
-```sh
-npm install -g strongloop
-```
+##Prerequisites
 
-###Create the LoopBack application
+Before starting, make sure you've followed [Getting Started with LoopBack](http://docs.strongloop.com/display/LB/Getting+started+with+LoopBack) to install Node and LoopBack. You will also need a basic understanding  of [LoopBack models](http://docs.strongloop.com/display/LB/Working+with+models).
+
+### Create the LoopBack application
 To demonstrate how to use [LoopBack MySQL Connector](https://github.com/strongloop/loopback-connector-mysql), let's create an application from scratch using the `slc` command. Follow the prompt and remember to name your project `loopback-example-database`. We will also add the connector to this project by using [NPM](https://www.npmjs.org/).
 
 ```sh
@@ -35,14 +36,14 @@ cd loopback-example-database
 npm install --save loopback-connector-mysql #add connector
 ```
 
-###Add a Data Source
+##Add a data source
 Run the following from the `loopback-example-database` directory to create a data source named `accountDB`:
 
 ```sh
 slc loopback:datasource accountDB
 ```
 
-###Configure the Data Source
+##Configure the data source
 By default, the auto-generated data source uses the [Memory Connector](http://docs.strongloop.com/display/LB/Memory+connector). However, since we're going to connect using MySQL, in `loopback-example-database/server/datasources.json`, modify the `accountDB` configuration to look like:
 
 ```json
@@ -60,7 +61,7 @@ By default, the auto-generated data source uses the [Memory Connector](http://do
 }
 ```
 
-###Add a Model
+## Add a model
 Once we have the data source configured properly, we can create an account model by running:
 
 ```sh
@@ -77,7 +78,7 @@ Follow the prompts to create your model with the following properties:
 
 These properties will be saved to `loopback-example-database/common/models/account.json` once the prompt exits.
 
-###Create the table and add test data
+## Create the table and add test data
 Now that we have an `account` model configured, we can generate its corresponding table and fields in the database using the API's provided by [LoopBack](http://loopback.io). Copy `create-test-data.js` from this repository and put it into `loopback-example-database/server/create-test-data.js`. Run the following in `loopback-example-database/server` to add dummy data to your database:
 
 ```sh
@@ -87,7 +88,7 @@ node create-test-data
 
 This script will add two accounts into your database.
 
-####create-test-data.js
+###create-test-data.js
 ```javascript
 dataSource.automigrate('account', function(er) {
   ...
@@ -105,7 +106,7 @@ dataSource.automigrate('account', function(er) {
 
 `Account.create()` inserts two sample records to the MySQL table.
 
-###Run the application
+##Run the application
 ```sh
 cd .. #change back to the project root, ie) loopback-example-database
 node .
@@ -143,7 +144,7 @@ To get an account by id, browse to [http://localhost:3000/api/accounts/1](http:/
 
 Each REST API can be viewed at [http://localhost:3000/explorer](http://localhost:3000/explorer)
 
-###Discovery
+##Discovery
 Now that we have the `account` table created properly in the database, we can discover (reverse engineer) the LoopBack model from the existing database schema. Change to the `loopback-example-database/server` directory and run:
 
 ```sh
@@ -213,7 +214,7 @@ Following the model definition, existing `accounts` are then displayed:
     modified: Thu Aug 28 2014 15:56:28 GMT-0700 (PDT) } ]
 ```
 
-####discover.js
+###discover.js
 The `dataSource.discoverSchema()` method returns the model definition based on the `account` table schema. `dataSource.discoverAndBuildModels()` goes one step further by making the model classes available to perform CRUD operations.
 
 ```javascript
