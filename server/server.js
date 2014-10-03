@@ -12,7 +12,7 @@ app.use(loopback.compress());
 // -- Add your pre-processing middleware here --
 
 // boot scripts mount components like REST API
-boot(app, __dirname);
+boot(app, __dirname, function(err) {
 
 // -- Mount static files here--
 // All static middleware should be registered at the end, as all requests
@@ -24,20 +24,21 @@ boot(app, __dirname);
 // Requests that get this far won't be handled
 // by any middleware. Convert them into a 404 error
 // that will be handled later down the chain.
-app.use(loopback.urlNotFound());
+  app.use(loopback.urlNotFound());
 
 // The ultimate error handler.
-app.use(loopback.errorHandler());
+  app.use(loopback.errorHandler());
 
-app.start = function() {
-  // start the web server
-  return app.listen(function() {
-    app.emit('started');
-    console.log('Web server listening at: %s', app.get('url'));
-  });
-};
+  app.start = function() {
+    // start the web server
+    return app.listen(function() {
+      app.emit('started');
+      console.log('Web server listening at: %s', app.get('url'));
+    });
+  };
 
 // start the server if `$ node server.js`
-if (require.main === module) {
-  app.start();
-}
+  if (require.main === module) {
+    app.start();
+  }
+});
