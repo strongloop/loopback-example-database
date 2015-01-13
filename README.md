@@ -1,3 +1,15 @@
+#THIS EXAMPLE IS DEPRECATED
+
+This repo has been split into 5 separate repositories:
+
+- [loopback-example-mongodb](http://github.com/strongloop/loopback-example-mongodb)
+- [loopback-example-mssql](http://github.com/strongloop/loopback-example-mssql)
+- [loopback-example-mysql](http://github.com/strongloop/loopback-example-mysql)
+- [loopback-example-oracle](http://github.com/strongloop/loopback-example-oracle)
+- [loopback-example-postgresql](http://github.com/strongloop/loopback-example-postgresql)
+
+---
+
 ##Overview
 
 This module demonstrates using various [LoopBack](http://loopback.io) database connectors. Each branch in the repository contains a prebuilt configuration for a specific connector.
