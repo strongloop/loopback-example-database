@@ -1,71 +1,111 @@
-#THIS EXAMPLE IS DEPRECATED
+# loopback-example-database
 
-This repo has been split into 5 separate repositories:
+An tutorial on database related features.
 
-- [loopback-example-mongodb](http://github.com/strongloop/loopback-example-mongodb)
-- [loopback-example-mssql](http://github.com/strongloop/loopback-example-mssql)
-- [loopback-example-mysql](http://github.com/strongloop/loopback-example-mysql)
-- [loopback-example-oracle](http://github.com/strongloop/loopback-example-oracle)
-- [loopback-example-postgresql](http://github.com/strongloop/loopback-example-postgresql)
+- [Overview](#overview)
+- [Prerequisites](#prerequisites)
+- [Running the example](#running-the-example)
+- [Tutorial](#tutorial---mongodb)
 
----
+## Overview
 
-##Overview
+### Topics covered
 
-This module demonstrates using various [LoopBack](http://loopback.io) database connectors. Each branch in the repository contains a prebuilt configuration for a specific connector.
+- Data sources
+  - Creating
+  - Configuring
+- Models
+  - Creating
+- Automigration
+- Instance introspection (Discovery)
 
-|Connector Name|Branch Name|
-|--------------|-----------|
-|[LoopBack Microsoft SQL Server Connector](https://github.com/strongloop/loopback-connector-mssql)|[mssql](https://github.com/strongloop/loopback-example-database/tree/mssql)|
-|[LoopBack MongoDB Connector](https://github.com/strongloop/loopback-connector-mongodb)|[mongodb](https://github.com/strongloop/loopback-example-database/tree/mongodb)|
-|[LoopBack MySQL Connector](https://github.com/strongloop/loopback-connector-mysql)|[master](https://github.com/strongloop/loopback-example-database/tree/master)|
-|[LoopBack Oracle Connector](https://github.com/strongloop/loopback-connector-oracle)|[oracle](https://github.com/strongloop/loopback-example-database/tree/oracle)|
-|[LoopBack PostgreSQL Connector](https://github.com/strongloop/loopback-connector-postgresql)|[postgresql](https://github.com/strongloop/loopback-example-database/tree/postgresql)|
+### Connector specific tutorials
 
-For example, run the following to view the MongoDB example:
+Connector specific tutorials are on separate branches. The master branch
+contains the tutorial for MongoDB.
 
-```sh
-git clone https://github.com/strongloop/loopback-example-database.git
+|Branch|Connector|
+|:--|:--|
+|master|MongoDB|
+|mssql|Microsoft SQL Server|
+|mysql|MySQL|
+|oracle|Oracle|
+|postgres|PostgreSQL|
+
+For example, to view the MySQL example:
+
+```
+git clone https://github.com/strongloop/loopback-example-database
 cd loopback-example-database
-git checkout mongodb
+git checkout mysql
 ```
 
-### Example: MySQL
+## Prerequisites
 
-This example procedure below demonstrates using the [LoopBack MySQL Connector](http://docs.strongloop.com/display/LB/MySQL+connector).   Using other datbase connectors is similar.  Instead of connecting to your own database instance (which you would normally do), this example shows how to 
-connect to an preconfigured MySQL instance running at demo.strongloop.com.
+Before starting this tutorial, make sure you have the following installed:
 
-##Prerequisites
+- Node
+- NPM
+- [StrongLoop Controller](https://github.com/strongloop/strongloop)
 
-Before starting, make sure you've followed [Getting Started with LoopBack](http://docs.strongloop.com/display/LB/Getting+started+with+LoopBack) to install Node and LoopBack. You will also need a basic understanding  of [LoopBack models](http://docs.strongloop.com/display/LB/Working+with+models).
+## Running the example
 
-### Create the LoopBack application
-To demonstrate how to use [LoopBack MySQL Connector](https://github.com/strongloop/loopback-connector-mysql), let's create an application from scratch using the `slc` command. Follow the prompt and remember to name your project `loopback-example-database`. We will also add the connector to this project by using [NPM](https://www.npmjs.org/).
-
-```sh
-slc loopback #create project
+```
+git clone https://github.com/strongloop/loopback-example-database
 cd loopback-example-database
-npm install --save loopback-connector-mysql #add connector
+npm install
+npm start
 ```
 
-##Add a data source
-Run the following from the `loopback-example-database` directory to create a data source named `accountDB`:
+## Tutorial - MongoDB
 
-```sh
-slc loopback:datasource accountDB
+### 1. Create a new LoopBack app
+
+#### App info
+
+- Name: `loopback-example-database`
+- Dir to contain the project: `loopback-example-database`
+
+```
+slc loopback loopback-example-database
+... # follow the prompts
 ```
 
-##Configure the data source
-By default, the auto-generated data source uses the [Memory Connector](http://docs.strongloop.com/display/LB/Memory+connector). However, since we're going to connect using MySQL, in `loopback-example-database/server/datasources.json`, modify the `accountDB` configuration to look like:
+### 2. Install the LoopBack MongoDB connector
 
-```json
+```
+cd loopback-example-database
+npm install --save loopback-connector-mongodb
+```
+
+### 3. Create a data source
+
+#### Data source info
+
+- Data source name: `accountDS`
+- Select the connector for `accountDS`: `MongoDB`
+
+```
+slc loopback:datasource accountDS
+... # follow the prompts
+```
+
+This creates a new data source named `accountDS` that uses the MongoDB
+connector.
+
+### 4. Configure the data source
+
+For the purposes of this example, we will use a preconfigured StrongLoop MongoDB
+server. Edit `server/datasources.json` to set the MongoDB configs:
+
+```
 {
   ...
-  "accountDB": {
-    "name": "accountDB",
-    "connector": "mysql",
+  "accountDS": {
+    "name": "accountDS",
+    "connector": "mongodb",
     "host": "demo.strongloop.com",
-    "port": 3306,
+    "port": 27017,
     "database": "demo",
     "username": "demo",
     "password": "L00pBack"
@@ -73,174 +113,135 @@ By default, the auto-generated data source uses the [Memory Connector](http://do
 }
 ```
 
-## Add a model
-Once we have the data source configured properly, we can create an account model by running:
+> Feel free to use your own local MongoDB instance. Simply change the configs
+> above to match your own.
 
-```sh
-slc loopback:model account
+### 5. Create a new model
+
+#### Model Info
+
+- Model name: `Account`
+- Attach `Account` to: `accountDS (mongodb)`
+- Base class: `PersistedModel`
+- Expose via REST: `Yes`
+- Custom plural form: <press enter> *Leave blank*
+- Properties:
+  - `email`
+    - String
+    - Not required
+  - `createdAt`
+    - Date
+    - Not required
+  - `lastModifiedAt`
+    - Date
+    - Not required
+
+```
+slc loopback:model Account
+... # follow the prompts
 ```
 
-Follow the prompts to create your model with the following properties:
+### 6. Create the collection with sample data - Automigration
 
-|Property|Data Type|Description|
-|--------|---------|-----------|
-|email|string|The email id for the account|
-|created|date|The time of creation for the account|
-|modified|date|The last modification time for the account|
+With the `account` model configured, we can generate the corresponding
+MongoDB collection using the info from the `Account` metadata in [`common/models/account.json`](common/models/account.json)
+via [*auto-migration*](https://docs.strongloop.com/display/public/LB/Implementing+auto-migration).
 
-These properties will be saved to `loopback-example-database/common/models/account.json` once the prompt exits.
+Start by creating a dir to store general-purpose scripts:
 
-## Create the table and add test data
-Now that we have an `account` model configured, we can generate its corresponding table and fields in the database using the API's provided by [LoopBack](http://loopback.io). Copy `create-test-data.js` from this repository and put it into `loopback-example-database/server/create-test-data.js`. Run the following in `loopback-example-database/server` to add dummy data to your database:
-
-```sh
-cd server #make sure you're in the server dir
-node create-test-data
+```
+mkdir bin
 ```
 
-This script will add two accounts into your database.
+Inside that dir, create a script named [`automigrate.js`](bin/automigrate.js).
+To create the `Account` collection and create two sample accounts, run:
 
-###create-test-data.js
-```javascript
-dataSource.automigrate('account', function(er) {
-  ...
-  accounts.forEach(function(account) {
-    Account.create(account, function(er, result) {
-      if (!er) return;
-      console.log('Record created:', result);
-      ...
-    });
-  });
-});
+```
+node bin/automigrate.js
 ```
 
-`dataSource.automigrate()` creates or recreates a table in MySQL based on the model definition for `account`. This means **if the table already exists, it will be dropped and all of its existing data will be lost**. If you want to keep the existing data, use `dataSource.autoupdate()` instead.
+> **WARNING**
+>
+> The `automigrate` function creates a new collection if it doesn't exist. If
+> the collection already exists, **it will be destroyed and it's data will be
+> deleted**. If you want to keep this data, use `autoupdate` instead.
 
-`Account.create()` inserts two sample records to the MySQL table.
+You should see:
 
-##Run the application
-```sh
-cd .. #change back to the project root, ie) loopback-example-database
+```
+Created: { email: 'baz@qux.com',
+  createdAt: Thu Oct 22 2015 17:58:09 GMT-0700 (PDT),
+  lastModifiedAt: Thu Oct 22 2015 17:58:09 GMT-0700 (PDT),
+  id: 562986213ea33440575c6588 }
+Created: { email: 'foo@bar.com',
+  createdAt: Thu Oct 22 2015 17:58:09 GMT-0700 (PDT),
+  lastModifiedAt: Thu Oct 22 2015 17:58:09 GMT-0700 (PDT),
+  id: 562986213ea33440575c6587 }
+```
+
+> If you are using Node 4, it is safe to ignore `Swagger: skipping unknown type
+> "ObjectId"`. This warning will be addressed in a future update.
+
+### 7. View data using the explorer
+
+Projects scaffolded via `slc loopback` come with `loopback-component-explorer`
+preconfigured. From the project root, start the server:
+
+```
 node .
 ```
 
-Browse to [http://localhost:3000/api/accounts](http://localhost:3000/api/accounts) to view the accounts you created in the previous step. You should see:
+Then to view the existing account data, browse to `localhost:3000/explorer` and
+click:
 
-```json
+- `GET /Accounts`
+- `Try it out!`
+
+You should see:
+
+```
 [
   {
     "email": "foo@bar.com",
-    "created": "2014-08-28T22:56:28.000Z", #yours will be different
-    "modified": "2014-08-28T22:56:28.000Z", #yours will be different
-    "id": 1
+    "createdAt": "2015-10-23T00:58:09.280Z",
+    "lastModifiedAt": "2015-10-23T00:58:09.280Z",
+    "id": "562986213ea33440575c6587"
   },
   {
-    "email": "bar@bar.com",
-    "created": "2014-08-28T22:56:28.000Z", #yours will be different
-    "modified": "2014-08-28T22:56:28.000Z", #yours will be different
-    "id": 2
+    "email": "baz@qux.com",
+    "createdAt": "2015-10-23T00:58:09.280Z",
+    "lastModifiedAt": "2015-10-23T00:58:09.280Z",
+    "id": "562986213ea33440575c6588"
   }
 ]
 ```
 
-To get an account by id, browse to [http://localhost:3000/api/accounts/1](http://localhost:3000/api/accounts/1).
+> Try out some of the other endpoints to get a feel for how explorer works.
 
-```json
-{
-  "email": "foo@bar.com",
-  "created": "2014-08-28T22:56:28.000Z", #yours will be different
-  "modified": "2014-08-28T22:56:28.000Z", #yours will be different
-  "id": 1
-}
+### 8. Add a script to perform instance instrospection - Discovery
+
+> [*Discovery*](https://docs.strongloop.com/display/public/LB/Discovering+models+from+relational+databases)
+> is the process of reverse engineering a LoopBack model from an existing database schema.
+
+The LoopBack MongoDB connector does not support discovery. However, you can use
+*instance instrospection*, which creates a LoopBack model from an existing
+JavaScript object.
+
+To do this, create a script named [`instance-introspections.js`](bin/instance-introspection.js)
+in the `bin` dir. Then run:
+
+```
+node bin/instance-introspection
 ```
 
-Each REST API can be viewed at [http://localhost:3000/explorer](http://localhost:3000/explorer)
+You should see:
 
-##Discovery
-Now that we have the `account` table created properly in the database, we can discover (reverse engineer) the LoopBack model from the existing database schema. Change to the `loopback-example-database/server` directory and run:
-
-```sh
-cd server #change back to the server dir
-node discover
+```
+Created: { email: 'bob.doe@ibm.com',
+  createdAt: Thu Oct 22 2015 19:38:20 GMT-0700 (PDT),
+  lastModifiedAt: Thu Oct 22 2015 19:38:20 GMT-0700 (PDT),
+  id: 56299d9d71c7f600719ca39f }
 ```
 
-First, we'll see the model definition for `account` in JSON format.
-
-```json
-{
-  "name": "Account",
-  "options": {
-    "idInjection": false,
-    "mysql": {
-      "schema": "demo",
-      "table": "account"
-    }
-  },
-  "properties": {
-    "id": {
-      "type": "Number",
-      "required": false,
-      "length": null,
-      "precision": 10,
-      "scale": 0,
-      "id": 1,
-      "mysql": {
-        "columnName": "id",
-        "dataType": "int",
-        "dataLength": null,
-        "dataPrecision": 10,
-        "dataScale": 0,
-        "nullable": "NO"
-      }
-    },
-    "email": {
-      "type": "String",
-      "required": false,
-      "length": 1536,
-      "precision": null,
-      "scale": null,
-      "mysql": {
-        "columnName": "email",
-        "dataType": "varchar",
-        "dataLength": 1536,
-        "dataPrecision": null,
-        "dataScale": null,
-        "nullable": "YES"
-      }
-    },
-    ...
-  }
-}
-```
-
-Following the model definition, existing `accounts` are then displayed:
-
-```json
-[ { id: 1,
-    email: 'foo@bar.com',
-    created: Thu Aug 28 2014 15:56:28 GMT-0700 (PDT),
-    modified: Thu Aug 28 2014 15:56:28 GMT-0700 (PDT) },
-  { id: 2,
-    email: 'bar@bar.com',
-    created: Thu Aug 28 2014 15:56:28 GMT-0700 (PDT),
-    modified: Thu Aug 28 2014 15:56:28 GMT-0700 (PDT) } ]
-```
-
-###discover.js
-The `dataSource.discoverSchema()` method returns the model definition based on the `account` table schema. `dataSource.discoverAndBuildModels()` goes one step further by making the model classes available to perform CRUD operations.
-
-```javascript
-dataSource.discoverSchema('account', { owner: 'demo' }, function(er, schema) {
-  ...
-  console.log(JSON.stringify(schema, null, '  '));
-});
-
-dataSource.discoverAndBuildModels('account', { owner: 'demo' }, function(er, models) {
-  ...
-  models.Account.find(function(er, accounts) {
-    if (er) return console.log(er);
-    console.log(accounts);
-    dataSource.disconnect();
-  });
-});
-```
+> See the [official docs](http://docs.strongloop.com/display/LB/Creating+models+from+unstructured+data)
+> for more info.
