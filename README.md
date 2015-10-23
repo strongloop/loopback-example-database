@@ -19,10 +19,10 @@ An tutorial on database related features.
 - Automigration
 - Instance introspection (Discovery)
 
-### Connector specific tutorials
+### Database specific tutorials
 
-Connector specific tutorials are on separate branches. The master branch
-contains the tutorial for MongoDB.
+Database specific tutorials are on separate branches. The master branch contains
+the tutorial for MongoDB.
 
 |Branch|Connector|
 |:--|:--|
