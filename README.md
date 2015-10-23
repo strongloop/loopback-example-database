@@ -218,7 +218,7 @@ You should see:
 
 > Try out some of the other endpoints to get a feel for how explorer works.
 
-### 8. Add a script to perform instance instrospection - Discovery
+### 8. Add a script to perform instance instrospection (Discovery)
 
 > [*Discovery*](https://docs.strongloop.com/display/public/LB/Discovering+models+from+relational+databases)
 > is the process of reverse engineering a LoopBack model from an existing database schema.
