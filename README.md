@@ -5,7 +5,7 @@ An tutorial on database related features.
 - [Overview](#overview)
 - [Prerequisites](#prerequisites)
 - [Running the example](#running-the-example)
-- [Tutorial](#tutorial---mongodb)
+- [Tutorial - MongoDB](#tutorial---mongodb)
 
 ## Overview
 
