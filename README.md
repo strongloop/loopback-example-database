@@ -26,7 +26,7 @@ contains the tutorial for MongoDB.
 
 |Branch|Connector|
 |:--|:--|
-|master|MongoDB|
+|[master](https://github.com/strongloop/loopback-example-database)|MongoDB|
 |mssql|Microsoft SQL Server|
 |mysql|MySQL|
 |oracle|Oracle|
