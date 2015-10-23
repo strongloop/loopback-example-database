@@ -5,11 +5,11 @@
   },
   "accountDS": {
     "host": "demo.strongloop.com",
-    "port": 27017,
-    "database": "demo",
+    "port": 3306,
+    "database": "loopback-example-mysql",
     "username": "demo",
     "password": "L00pBack",
     "name": "accountDS",
-    "connector": "mongodb"
+    "connector": "mysql"
   }
 }
