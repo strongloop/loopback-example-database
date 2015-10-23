@@ -27,10 +27,10 @@ the tutorial for MongoDB.
 |Branch|Connector|
 |:--|:--|
 |[master](https://github.com/strongloop/loopback-example-database)|MongoDB|
-|mssql|Microsoft SQL Server|
-|mysql|MySQL|
-|oracle|Oracle|
-|postgres|PostgreSQL|
+|[mssql](https://github.com/strongloop/loopback-example-database/tree/mssql)|Microsoft SQL Server|
+|[mysql](https://github.com/strongloop/loopback-example-database/tree/mysql)|MySQL|
+|[oracle](https://github.com/strongloop/loopback-example-database/tree/oracle)|Oracle|
+|[postgresql](https://github.com/strongloop/loopback-example-database/tree/postgresql)|PostgreSQL|
 
 For example, to view the MySQL example:
 
