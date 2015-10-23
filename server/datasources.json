@@ -4,12 +4,12 @@
     "connector": "memory"
   },
   "accountDS": {
-    "host": "demo.strongloop.com",
-    "port": 27017,
-    "database": "demo",
-    "username": "demo",
-    "password": "L00pBack",
     "name": "accountDS",
-    "connector": "mongodb"
+    "connector": "oracle",
+    "host": "oracle-demo.strongloop.com",
+    "port": 1521,
+    "database": "XE",
+    "username": "demo",
+    "password": "L00pBack"
   }
 }
