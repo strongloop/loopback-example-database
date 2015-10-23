@@ -1,19 +1,23 @@
 {
-  "name": "account",
+  "name": "Account",
   "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
   "properties": {
     "email": {
       "type": "string"
     },
-    "created": {
+    "createdAt": {
       "type": "date"
     },
-    "modified": {
+    "lastModifiedAt": {
       "type": "date"
     }
   },
   "validations": [],
   "relations": {},
   "acls": [],
-  "methods": []
+  "methods": {}
 }
