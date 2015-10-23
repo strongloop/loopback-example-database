@@ -4,12 +4,12 @@
     "connector": "memory"
   },
   "accountDS": {
+    "name": "accountDS",
+    "connector": "postgresql",
     "host": "demo.strongloop.com",
-    "port": 27017,
+    "port": 5432,
     "database": "demo",
     "username": "demo",
-    "password": "L00pBack",
-    "name": "accountDS",
-    "connector": "mongodb"
+    "password": "L00pBack"
   }
 }
