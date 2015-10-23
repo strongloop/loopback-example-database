@@ -5,7 +5,7 @@ An tutorial on database related features.
 - [Overview](#overview)
 - [Prerequisites](#prerequisites)
 - [Running the example](#running-the-example)
-- [Tutorial - MongoDB](#tutorial---mongodb)
+- [Tutorial - MySQL](#tutorial---mysql)
 
 ## Overview
 
@@ -17,7 +17,7 @@ An tutorial on database related features.
 - Models
   - Creating
 - Automigration
-- Instance introspection (Discovery)
+- Discovery
 
 ### Database specific tutorials
 
@@ -57,7 +57,7 @@ npm install
 npm start
 ```
 
-## Tutorial - MongoDB
+## Tutorial - MySQL
 
 ### 1. Create a new LoopBack app
 
@@ -71,11 +71,11 @@ slc loopback loopback-example-database
 ... # follow the prompts
 ```
 
-### 2. Install the LoopBack MongoDB connector
+### 2. Install the LoopBack MySQL connector
 
 ```
 cd loopback-example-database
-npm install --save loopback-connector-mongodb
+npm install --save loopback-connector-mysql
 ```
 
 ### 3. Create a data source
@@ -83,20 +83,19 @@ npm install --save loopback-connector-mongodb
 #### Data source info
 
 - Data source name: `accountDS`
-- Select the connector for `accountDS`: `MongoDB`
+- Select the connector for `accountDS`: `MySQL`
 
 ```
 slc loopback:datasource accountDS
 ... # follow the prompts
 ```
 
-This creates a new data source named `accountDS` that uses the MongoDB
-connector.
+This creates a new data source named `accountDS` that uses the MySQL connector.
 
 ### 4. Configure the data source
 
-For the purposes of this example, we will use a preconfigured StrongLoop MongoDB
-server. Edit `server/datasources.json` to set the MongoDB configs:
+For the purposes of this example, we will use a preconfigured StrongLoop MySQL
+server. Edit `server/datasources.json` to set the MySQL configs:
 
 ```
 {
@@ -105,15 +104,15 @@ server. Edit `server/datasources.json` to set the MongoDB configs:
     "name": "accountDS",
     "connector": "mongodb",
     "host": "demo.strongloop.com",
-    "port": 27017,
-    "database": "demo",
+    "port": 3306,
+    "database": "loopback-example-mysql",
     "username": "demo",
     "password": "L00pBack"
   }
 }
 ```
 
-> Feel free to use your own local MongoDB instance. Simply change the configs
+> Feel free to use your own local MySQL instance. Simply change the configs
 > above to match your own.
 
 ### 5. Create a new model
@@ -121,7 +120,7 @@ server. Edit `server/datasources.json` to set the MongoDB configs:
 #### Model Info
 
 - Model name: `Account`
-- Attach `Account` to: `accountDS (mongodb)`
+- Attach `Account` to: `accountDS (mysql)`
 - Base class: `PersistedModel`
 - Expose via REST: `Yes`
 - Custom plural form: <press enter> *Leave blank*
@@ -144,7 +143,7 @@ slc loopback:model Account
 ### 6. Create the collection with sample data - Automigration
 
 With the `account` model configured, we can generate the corresponding
-MongoDB collection using the info from the `Account` metadata in [`common/models/account.json`](common/models/account.json)
+MySQL table using the info from the `Account` metadata in [`common/models/account.json`](common/models/account.json)
 via [*auto-migration*](https://docs.strongloop.com/display/public/LB/Implementing+auto-migration).
 
 Start by creating a dir to store general-purpose scripts:
@@ -169,18 +168,15 @@ node bin/automigrate.js
 You should see:
 
 ```
-Created: { email: 'baz@qux.com',
+Created: { email: 'john.doe@ibm.com',
   createdAt: Thu Oct 22 2015 17:58:09 GMT-0700 (PDT),
   lastModifiedAt: Thu Oct 22 2015 17:58:09 GMT-0700 (PDT),
   id: 562986213ea33440575c6588 }
-Created: { email: 'foo@bar.com',
+Created: { email: 'jane.doe@ibm.com',
   createdAt: Thu Oct 22 2015 17:58:09 GMT-0700 (PDT),
   lastModifiedAt: Thu Oct 22 2015 17:58:09 GMT-0700 (PDT),
   id: 562986213ea33440575c6587 }
 ```
-
-> If you are using Node 4, it is safe to ignore `Swagger: skipping unknown type
-> "ObjectId"`. This warning will be addressed in a future update.
 
 ### 7. View data using the explorer
 
@@ -202,13 +198,13 @@ You should see:
 ```
 [
   {
-    "email": "foo@bar.com",
+    "email": "john.doe@ibm.com",
     "createdAt": "2015-10-23T00:58:09.280Z",
     "lastModifiedAt": "2015-10-23T00:58:09.280Z",
     "id": "562986213ea33440575c6587"
   },
   {
-    "email": "baz@qux.com",
+    "email": "jane.doe@ibm.com",
     "createdAt": "2015-10-23T00:58:09.280Z",
     "lastModifiedAt": "2015-10-23T00:58:09.280Z",
     "id": "562986213ea33440575c6588"
@@ -218,32 +214,123 @@ You should see:
 
 > Try out some of the other endpoints to get a feel for how explorer works.
 
-### 8. Add a script to perform instance instrospection (Discovery)
+### 8. Add a script to perform discover the database schema
 
 > [*Discovery*](https://docs.strongloop.com/display/public/LB/Discovering+models+from+relational+databases)
-> is the process of reverse engineering a LoopBack model from an existing database schema.
+> is the process of reverse engineering a LoopBack model from an existing
+> database schema.
 
-The LoopBack MongoDB connector does not support discovery. However, you can use
-*instance instrospection*, which creates a LoopBack model from an existing
-JavaScript object.
-
-To do this, create a script named [`instance-introspections.js`](bin/instance-introspection.js)
-in the `bin` dir. Then run:
+Create a script name [`discover-schema.js`](bin/discover-schema.js). Then run this script to
+discover the schema from the existing `Account` table:
 
 ```
-node bin/instance-introspection
+node bin/discover-schema
 ```
 
 You should see:
 
 ```
-Created: { email: 'bob.doe@ibm.com',
-  createdAt: Thu Oct 22 2015 19:38:20 GMT-0700 (PDT),
-  lastModifiedAt: Thu Oct 22 2015 19:38:20 GMT-0700 (PDT),
-  id: 56299d9d71c7f600719ca39f }
+{
+  "name": "Account",
+  "options": {
+    "idInjection": false,
+    "mysql": {
+      "schema": "loopback-example-mysql",
+      "table": "Account"
+    }
+  },
+  "properties": {
+    "id": {
+      "type": "Number",
+      "required": true,
+      "length": null,
+      "precision": 10,
+      "scale": 0,
+      "id": 1,
+      "mysql": {
+        "columnName": "id",
+        "dataType": "int",
+        "dataLength": null,
+        "dataPrecision": 10,
+        "dataScale": 0,
+        "nullable": "N"
+      }
+    },
+    "email": {
+      "type": "String",
+      "required": false,
+      "length": 512,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "email",
+        "dataType": "varchar",
+        "dataLength": 512,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      }
+    },
+    "createdat": {
+      "type": "Date",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "createdAt",
+        "dataType": "datetime",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      }
+    },
+    "lastmodifiedat": {
+      "type": "Date",
+      "required": false,
+      "length": null,
+      "precision": null,
+      "scale": null,
+      "mysql": {
+        "columnName": "lastModifiedAt",
+        "dataType": "datetime",
+        "dataLength": null,
+        "dataPrecision": null,
+        "dataScale": null,
+        "nullable": "Y"
+      }
+    }
+  }
+}
 ```
 
-> See the [official docs](http://docs.strongloop.com/display/LB/Creating+models+from+unstructured+data)
+### 9. Add a script to discover and build models
+
+When retrieving the scheme is not enough, you can discover and build LoopBack
+models in one step.
+
+Create a sript named [`discover-and-build-models.js`](bin/discover-and-build-models.js).
+Then run:
+
+```
+node bin/discover-and-build-models
+```
+
+You should see:
+
+```
+Found: [ { id: 1,
+    email: 'john.doe@ibm.com',
+    createdat: Fri Oct 23 2015 15:07:51 GMT-0700 (PDT),
+    lastmodifiedat: Fri Oct 23 2015 15:07:51 GMT-0700 (PDT) },
+  { id: 2,
+    email: 'jane.doe@ibm.com',
+    createdat: Fri Oct 23 2015 15:07:51 GMT-0700 (PDT),
+    lastmodifiedat: Fri Oct 23 2015 15:07:51 GMT-0700 (PDT) } ]
+```
+
+> See the [official docs](https://docs.strongloop.com/display/public/LB/Discovering+models+from+relational+databases)
 > for more info.
 
 ---
