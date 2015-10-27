@@ -1,6 +1,6 @@
 # loopback-example-database
 
-An tutorial on database related features.
+An tutorial for basic database related features.
 
 - [Overview](#overview)
 - [Prerequisites](#prerequisites)
