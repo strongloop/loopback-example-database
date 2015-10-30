@@ -1,0 +1,6 @@
+{
+  "expr": true,
+  "globals": [
+    "app"
+  ]
+}

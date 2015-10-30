@@ -17,5 +17,9 @@
   "unused": false,
   "trailing": true,
   "sub": true,
-  "maxlen": 80
+  "maxlen": 80,
+  "globals": [
+    "describe",
+    "it"
+  ]
 }
