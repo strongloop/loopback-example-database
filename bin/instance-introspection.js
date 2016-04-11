@@ -6,10 +6,10 @@ var ds = app.datasources.accountDS;
 var account = {
   email: 'bob.doe@ibm.com',
   createdAt: new Date(),
-  lastModifiedAt: new Date()
+  lastModifiedAt: new Date(),
 };
 var opts = {
-  idInjection: true
+  idInjection: true,
 };
 var Account = ds.buildModelFromInstance('Account', account, opts);
 
