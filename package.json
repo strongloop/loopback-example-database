@@ -3,9 +3,10 @@
   "version": "2.0.0",
   "main": "server/server.js",
   "scripts": {
-    "pretest": "jshint .",
     "start": "node .",
-    "test": "tape test/*.js"
+    "lint": "eslint .",    
+    "test": "tape test/*.js",
+    "posttest": "npm run lint"      
   },
   "dependencies": {
     "compression": "^1.0.3",
@@ -18,7 +19,8 @@
     "serve-favicon": "^2.0.1"
   },
   "devDependencies": {
-    "jshint": "^2.5.6",
+    "eslint": "^2.7.0",
+    "eslint-config-loopback": "^1.0.0",
     "tape": "^4.2.2"
   },
   "repository": {

@@ -9,13 +9,13 @@ ds.automigrate('Account', function(err) {
     {
       email: 'john.doe@ibm.com',
       createdAt: new Date(),
-      lastModifiedAt: new Date()
+      lastModifiedAt: new Date(),
     },
     {
       email: 'jane.doe@ibm.com',
       createdAt: new Date(),
-      lastModifiedAt: new Date()
-    }
+      lastModifiedAt: new Date(),
+    },
   ];
   var count = accounts.length;
   accounts.forEach(function(account) {
