@@ -4,9 +4,9 @@
   "main": "server/server.js",
   "scripts": {
     "start": "node .",
-    "lint": "eslint .",    
+    "lint": "eslint .",
     "test": "tape test/*.js",
-    "posttest": "npm run lint"      
+    "posttest": "npm run lint"
   },
   "dependencies": {
     "compression": "^1.0.3",
