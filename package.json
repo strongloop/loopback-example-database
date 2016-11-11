@@ -11,12 +11,12 @@
   "dependencies": {
     "compression": "^1.0.3",
     "cors": "^2.5.2",
-    "loopback": "^2.22.0",
+    "loopback": "^3.0.0",
     "loopback-boot": "^2.6.5",
     "loopback-component-explorer": "^2.1.0",
     "loopback-connector-postgresql": "^2.3.0",
-    "loopback-datasource-juggler": "^2.39.0",
-    "serve-favicon": "^2.0.1"
+    "serve-favicon": "^2.0.1",
+    "strong-error-handler": "^1.1.0"
   },
   "devDependencies": {
     "chai": "^3.4.0",
