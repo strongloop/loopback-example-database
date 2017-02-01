@@ -45,8 +45,7 @@ git checkout mysql
 Before starting this tutorial, make sure you have the following installed:
 
 - Node
-- NPM
-- [StrongLoop Controller](https://github.com/strongloop/loopback)
+- LoopBack CLI tools; see [lb](http://loopback.io/doc/en/lb3/Installation.html)
 
 ## Running the example
 
