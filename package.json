@@ -28,5 +28,6 @@
     "url": "https://github.com/strongloop/loopback-example-database"
   },
   "description": "loopback-example-database",
-  "license": "MIT"
+  "license": "MIT",
+  "author": "IBM Corp."
 }
